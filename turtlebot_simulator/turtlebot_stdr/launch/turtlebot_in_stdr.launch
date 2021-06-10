@@ -90,7 +90,7 @@
   <!--  **************** Visualisation ****************  -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_stdr)/rviz/robot_navigation.rviz"/>
 
-
+<!--  **************** wei ****************  -->
 
 
 </launch>
