@@ -1,0 +1,187 @@
+$ git clone https://github.com/Jeromylin/git_practice.git
+
+Cloning into 'git_practice'...
+remote: Enumerating objects: 105, done.
+remote: Counting objects: 100% (105/105), done.
+remote: Compressing objects: 100% (97/97), done.
+remote: Total 105 (delta 21), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (105/105), 378.73 KiB | 415.00 KiB/s, done.
+Resolving deltas: 100% (21/21), done.
+Checking connectivity... done.
+
+$ cd ~/git_practice
+$ ls
+
+README.md  turtlebot_simulator
+
+$ git status
+
+On branch main
+Your branch is up-to-date with 'origin/main'.
+nothing to commit, working directory clean
+
+$ cd ~/git_practice/turtlebot_simulator/turtlebot_gazebo/launch
+
+
+$ cat amcl_demo.launch
+
+<launch>
+  <!-- Map server --Updating 2021/06/10>
+  <arg name="map_file" default="$(env TURTLEBOT_GAZEBO_MAP_FILE)"/>
+  <arg name="3d_sensor" default="$(env TURTLEBOT_3D_SENSOR)"/>  <!-- r200, kinect, asus_xtion_pro -->
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!-- Localization -->
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_a" default="0.0"/>
+  <arg name="custom_amcl_launch_file" default="$(find turtlebot_navigation)/launch/includes/amcl/$(arg 3d_sensor)_amcl.launch.xml"/>
+
+  <include file="$(arg custom_amcl_launch_file)">
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+  </include>
+
+  <!-- Move base -->
+ <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+</launch>
+
+$ gedit amcl_demo.launch
+
+ line 18 add <!-- <arg name="initial_pose_z" value="$(arg initial_pose_z)"/>-->
+
+
+
+$ cd ../../..
+-git_practice root dir-
+
+$ git status
+On branch main
+Your branch is up-to-date with 'origin/main'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   turtlebot_simulator/turtlebot_gazebo/launch/amcl_demo.launch
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git branch
+* main //* means current branch
+
+
+$ git branch 1.0v
+$ git branch
+  1.0v
+* main
+
+$ git checkout 1.0v
+M	turtlebot_simulator/turtlebot_gazebo/launch/amcl_demo.launch
+Switched to branch '1.0v'
+
+
+$ git branch 
+* 1.0v
+  main
+
+
+$ git add --all
+$ git status
+On branch 1.0v
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   turtlebot_simulator/turtlebot_gazebo/launch/amcl_demo.launch
+
+
+$ git log
+
+commit 0207cae21fd1275edd811a6533de239e3a3c5311
+Merge: 5c38f23 cd6dfb5
+Author: Wei <39551764+ctwei8429@users.noreply.github.com>
+Date:   Thu Jun 10 15:23:27 2021 +0800
+
+    Merge pull request #4 from Jeromylin/ctwei8429-patch-2
+    
+    Update README.md
+
+commit cd6dfb548471768721334ed48a17e2ffe4f15efd
+Author: Wei <39551764+ctwei8429@users.noreply.github.com>
+Date:   Thu Jun 10 15:18:45 2021 +0800
+
+    Update README.md
+    
+    only Commit directly to the wei branch.
+
+commit 5c38f2357062aa1e7eb3341b6a3a58d9dd0f769c
+Author: Jeromylin <34641665+Jeromylin@users.noreply.github.com>
+Date:   Thu Jun 10 15:15:55 2021 +0800
+
+    Update amcl_demo.launch
+
+commit 0e34c31be021797e49b8c75cf3c39f52fa81989e
+:q
+
+$cd ~/turtlebot_simulator/turtlebot_gazebo/launch/
+$ gedit sample.txt
+$ cat sample.txt
+King of git
+
+$ git status 
+On branch 1.0v
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   turtlebot_simulator/turtlebot_gazebo/launch/amcl_demo.launch
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	turtlebot_simulator/turtlebot_gazebo/launch/sample.txt
+$ git log
+
+commit 6c496252cddadab2bcc775be076c86b8e50dfd4b
+Author: wei <ctwei8429@gmail.com>
+Date:   Thu Jun 17 11:38:07 2021 +0800
+
+    new samole flie txt
+
+commit 0207cae21fd1275edd811a6533de239e3a3c5311
+Merge: 5c38f23 cd6dfb5
+Author: Wei <39551764+ctwei8429@users.noreply.github.com>
+Date:   Thu Jun 10 15:23:27 2021 +0800
+
+    Merge pull request #4 from Jeromylin/ctwei8429-patch-2
+    
+    Update README.md
+
+commit cd6dfb548471768721334ed48a17e2ffe4f15efd
+Author: Wei <39551764+ctwei8429@users.noreply.github.com>
+Date:   Thu Jun 10 15:18:45 2021 +0800
+
+    Update README.md
+    
+    only Commit directly to the wei branch.
+
+commit 5c38f2357062aa1e7eb3341b6a3a58d9dd0f769c
+
+$ git status
+On branch 1.0v
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	turtlebot_simulator/turtlebot_gazebo/launch/sample.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+$ git status 
+On branch 1.0v
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   turtlebot_simulator/turtlebot_gazebo/launch/sample.txt
+
+
+
